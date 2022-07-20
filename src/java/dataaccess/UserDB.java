@@ -1,6 +1,7 @@
 package dataaccess;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 import models.User;
 
@@ -28,5 +29,21 @@ public class UserDB {
         } finally {
             em.close();
         }
+    }
+
+    public void update(User user) throws Exception {
+        
+         EntityManager em = DBUtil.getEmFactory().createEntityManager();
+         EntityTransaction trans = em.getTransaction();
+         
+         try{
+           trans.begin();
+           em.merge(user);
+           trans.commit();
+         }catch(Exception ex){
+             trans.rollback();
+         }finally{
+            em.close();
+         }
     }
 }

@@ -56,6 +56,7 @@ public class ResetPasswordServlet extends HttpServlet {
                 String uuid = request.getParameter("uuid");
                 String password = request.getParameter("password");
                 accountService.changePassword(uuid, password);
+               
                 
                 getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
                 return; 
